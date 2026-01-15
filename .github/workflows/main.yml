@@ -13,7 +13,17 @@ on:
         required: true
         description: Router Model Name
         type: string
-        default: ax3000t
+        default: newland_nl-wr8103
+      veio:
+        required: true
+        description: VERSION
+        type: choice
+        default: '2023'
+        options:
+          - '2022'
+          - '2023'
+          - '2024'
+          - '2025'
       multi-layout:
         required: true
         description: Enable Multiple Flash Layout Support
@@ -48,6 +58,7 @@ jobs:
         env:
           SOC: ${{ inputs.soc }}
           BOARD: ${{ inputs.board }}
+          VERSION: ${{ inputs.veio }}
           MULTI_LAYOUT: ${{ inputs.multi-layout }}
       - uses: actions/upload-artifact@v4
         with:
