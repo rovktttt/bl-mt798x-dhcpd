@@ -1,4 +1,4 @@
-name: Uboot Ubuntu CI Build2
+name: Uboot Ubuntu CI Build
 run-name: Uboot - ${{ inputs.board }} (${{ inputs.soc }})
 
 on:
@@ -26,7 +26,7 @@ on:
           - '2025'
       multi-layout:
         required: true
-        description: 是否开启多分区1开启0关闭
+        description: 是否开启多分区，1开启，0关闭
         type: choice
         default: '1'
         options:
@@ -34,9 +34,9 @@ on:
           - '1'
       runs-on:
         required: true
-        description: Runs on...
+        description: 乌班图版本。
         type: choice
-        default: 乌班图版本
+        default: ubuntu-latest
         options:
           - ubuntu-22.04
           - ubuntu-24.04
