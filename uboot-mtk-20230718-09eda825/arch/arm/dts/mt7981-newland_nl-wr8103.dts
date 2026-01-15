@@ -28,8 +28,13 @@
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),49152k(ubi),49152k(ubi1)";
 		};
-
-		layout@1 {
+        layout@1 {
+			label = "immortalwrt-112m";
+			// mtd layout for immortalwrt/openwrt 112M ubi firmware
+			mtdids = "nmbm0=nmbm0";
+			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(Factory),2048k(fip),112M(ubi)";
+		};	
+		layout@2 {
 			label = "expand(114m)";
 			// mtd layout for 114m ubi firmware
 			mtdids = "nmbm0=nmbm0";
@@ -53,25 +58,26 @@
 			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
 		};
 	};
-
+	
 	leds {
 		compatible = "gpio-leds";
 
 		led@0 {
-			label = "red:system";
-			gpios = <&gpio 10 GPIO_ACTIVE_LOW>;
+			label = "green:system";
+			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 		};
 
 		led@1 {
-			label = "green:system";
-			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
+			label = "blue:system";
+			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
 		led@2 {
-			label = "blue:system";
-			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
+			label = "red:system";
+			gpios = <&gpio 34 GPIO_ACTIVE_LOW>;
 		};
 	};
+	
 	memory@40000000 {
 		device_type = "memory";
 		reg = <0x40000000 0x10000000>;
