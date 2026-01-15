@@ -1,0 +1,66 @@
+name: Uboot Ubuntu CI Build2
+run-name: Uboot - ${{ inputs.board }} (${{ inputs.soc }})
+
+on:
+  workflow_dispatch:
+    inputs:
+      soc:
+        required: true
+        description: 处理器型号
+        type: string
+        default: mt7981
+      board:
+        required: true
+        description: 路由器名称
+        type: string
+        default: newland_nl-wr8103
+      veio:
+        required: true
+        description: U-boot版本
+        type: choice
+        default: '2023'
+        options:
+          - '2022'
+          - '2023'
+          - '2024'
+          - '2025'
+      multi-layout:
+        required: true
+        description: 是否开启多分区1开启0关闭
+        type: choice
+        default: '1'
+        options:
+          - '0'
+          - '1'
+      runs-on:
+        required: true
+        description: Runs on...
+        type: choice
+        default: 乌班图版本
+        options:
+          - ubuntu-22.04
+          - ubuntu-24.04
+          - ubuntu-latest
+
+jobs:
+  ubuntu-build:
+    name: Build on ${{ inputs.runs-on }}
+    runs-on: ${{ inputs.runs-on }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get build dept.
+        run: |
+          sudo apt update
+          sudo apt install gcc-aarch64-linux-gnu build-essential flex bison libssl-dev device-tree-compiler
+      - name: Build it
+        run: |
+          ./build.sh
+        env:
+          SOC: ${{ inputs.soc }}
+          BOARD: ${{ inputs.board }}
+          VERSION: ${{ inputs.veio }}
+          MULTI_LAYOUT: ${{ inputs.multi-layout }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Uboot - ${{ inputs.board }} (${{ inputs.soc }})
+          path: output/*.bin
