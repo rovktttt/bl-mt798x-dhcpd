@@ -1,4 +1,4 @@
-name: Uboot Ubuntu CI Build
+name: Uboot Ubuntu CI Build1
 run-name: Uboot - ${{ inputs.board }} (${{ inputs.soc }})
 
 on:
