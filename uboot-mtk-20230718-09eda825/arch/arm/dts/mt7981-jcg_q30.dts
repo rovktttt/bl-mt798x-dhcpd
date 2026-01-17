@@ -39,15 +39,19 @@
 
 	leds {
 		compatible = "gpio-leds";
-
-		status_red_led: led-0 {
-			label = "red:status";
-			gpios = <&gpio 8 GPIO_ACTIVE_HIGH>;
+		led@0 {
+			label = "green:system";
+			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 
-		status_blue_led: led-1 {
-			label = "blue:status";
-			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
+		led@1 {
+			label = "blue:system";
+			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
+		};
+
+		led@2 {
+			label = "red:system";
+			gpios = <&gpio 10 GPIO_ACTIVE_LOW>;
 		};
 	};
 
