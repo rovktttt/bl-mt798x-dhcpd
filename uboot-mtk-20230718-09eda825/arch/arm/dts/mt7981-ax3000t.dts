@@ -47,6 +47,13 @@
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),256k(Nvram),256k(Bdata),2048k(factory),2048k(fip),256k(crash),256k(crash_log),100m(ubi),12m(data),256k(KF)";
 		};
+		
+		layout@3 {
+			label = "q30pro-110.5M";
+			// mtd layout for lean q30pro-110.5m
+			mtdids = "nmbm0=nmbm0";
+			mtdparts = "nmbm0:1024k(bl2),256k(Nvram),256k(Bdata),2048k(factory),2048k(fip),256k(crash),256k(crash_log),113152k(ubi),12m(data),256k(KF)";
+		};
 	};
 
 	gpio-keys {
