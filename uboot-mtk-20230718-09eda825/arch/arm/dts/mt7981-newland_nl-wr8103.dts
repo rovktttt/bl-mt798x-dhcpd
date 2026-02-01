@@ -52,7 +52,7 @@
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),102400k(ubi)";
 		};
-		layout@4 {
+		layout@5 {
 			label = "expand(114m)";
 			// mtd layout for 114m ubi firmware
 			mtdids = "nmbm0=nmbm0";
