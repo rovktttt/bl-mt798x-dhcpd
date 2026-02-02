@@ -22,32 +22,38 @@
 	};
 
 	mtd-layout {
-        layout@0 {
-			label = "default_112M";
+		layout@0 {
+			label = "default";
+			// mtd layout for stock 48m ubi firmware
+			mtdids = "nmbm0=nmbm0";
+			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),49152k(ubi),49152k(ubi1)";
+		};
+        layout@1 {
+			label = "immortalwrt-112M";
 			// mtd layout for immortalwrt/openwrt 112m ubi firmware
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),114688k(ubi)";
 		};
-		layout@1 {
+		layout@2 {
 			label = "q30pro_qwrt-110.5M";
 			// mtd layout for immortalwrt/openwrt 110.5m ubi firmware
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),113152k(ubi)";
 		};
-		layout@2 {
+		layout@3 {
 			label = "wr30u_qwrt-110M";
 			// mtd layout for lean qwrt 110m ubi firmware
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),112640k(ubi)";
 		};
-		layout@3 {
+		layout@4 {
 			label = "ax3000t_qwrt-100M";
 			// mtd layout for lean qwrt 100m ubi firmware
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),102400k(ubi)";
 		};
-		layout@4 {
-			label = "expand(114M)";
+		layout@5 {
+			label = "expand-114M";
 			// mtd layout for 114m ubi firmware
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),116736k(ubi)";
@@ -72,18 +78,18 @@
 	leds {
 		compatible = "gpio-leds";
 		led@0 {
-			label = "green:system";
-			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
+			label = "red:system";
+			gpios = <&gpio 10 GPIO_ACTIVE_LOW>;
 		};
 
 		led@1 {
-			label = "blue:system";
-			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
+			label = "green:system";
+			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 
 		led@2 {
-			label = "red:system";
-			gpios = <&gpio 34 GPIO_ACTIVE_LOW>;
+			label = "blue:system";
+			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 	};	
 	memory@40000000 {
