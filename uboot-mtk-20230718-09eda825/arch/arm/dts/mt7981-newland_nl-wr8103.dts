@@ -4,6 +4,7 @@
 #include "mt7981.dtsi"
 #include <dt-bindings/gpio/gpio.h>
 
+
 / {
 	#address-cells = <1>;
 	#size-cells = <1>;
@@ -27,39 +28,49 @@
 			// mtd layout for stock 48m ubi firmware
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),49152k(ubi),49152k(ubi1)";
-		};
-        layout@1 {
+		};		
+		layout@1 {
+			label = "mi-ax3000t_YC32M";
+			// mtd layout for xiaomi stock ubi or openwrt-stock/immortalwrt-stock firmware
+			cmdline = "console=ttyS0,115200n1 loglevel=8 swiotlb=512 firmware=0 mtd=ubi uart_en=1";
+			mtdids = "nmbm0=nmbm0";
+			mtdparts = "nmbm0:1024k(bl2),256k(Nvram),256k(Bdata),2048k(factory),2048k(fip),256k(crash),256k(crash_log),34816k(ubi_kernel),79872k(ubi),256k(KF)";
+			boot_part = "ubi_kernel"; // ubi boot part, default is "ubi"
+			factory_part = "ubi_kernel"; // factory firmware write part, default is "ubi"
+			sysupgrade_kernel_ubipart = "ubi_kernel"; // sysupgrade kernel write part (ubi volume: kernel), default is "ubi"
+			sysupgrade_rootfs_ubipart = "ubi"; // sysupgrade rootfs write part (ubi volume: rootfs, rootfs_data)
+		};		
+        layout@2 {
 			label = "immortalwrt-112M";
 			// mtd layout for immortalwrt/openwrt 112m ubi firmware
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),114688k(ubi)";
 		};
-		layout@2 {
+		layout@3 {
 			label = "q30pro_qwrt-110.5M";
 			// mtd layout for immortalwrt/openwrt 110.5m ubi firmware
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),113152k(ubi)";
 		};
-		layout@3 {
+		layout@4 {
 			label = "wr30u_qwrt-110M";
 			// mtd layout for lean qwrt 110m ubi firmware
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),112640k(ubi)";
 		};
-		layout@4 {
+		layout@5 {
 			label = "ax3000t_qwrt-100M";
 			// mtd layout for lean qwrt 100m ubi firmware
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),102400k(ubi)";
 		};
-		layout@5 {
+		layout@6 {
 			label = "expand-114M";
 			// mtd layout for 114m ubi firmware
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),116736k(ubi)";
 		};
 	};
-
 	gpio-keys {
 		compatible = "gpio-keys";
 
@@ -78,18 +89,18 @@
 	leds {
 		compatible = "gpio-leds";
 		led@0 {
-			label = "red:system";
-			gpios = <&gpio 10 GPIO_ACTIVE_LOW>;
+			label = "green:system";
+			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 		};
 
 		led@1 {
-			label = "green:system";
-			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
+			label = "blue:system";
+			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
 		led@2 {
-			label = "blue:system";
-			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
+			label = "red:system";
+			gpios = <&gpio 34 GPIO_ACTIVE_LOW>;
 		};
 	};	
 	memory@40000000 {
